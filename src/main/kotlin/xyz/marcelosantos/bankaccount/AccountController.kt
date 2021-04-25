@@ -22,4 +22,9 @@ class AccountController(val repository: AccountRepository) {
         return ResponseEntity.ok(saved)
     }
 
+    @DeleteMapping("{document}")
+    fun delete(@PathVariable document: String) = repository
+        .findByDocument(document)
+        .ifPresent { repository.delete(it) }
+
 }
